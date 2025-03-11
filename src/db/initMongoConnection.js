@@ -19,7 +19,6 @@ export const initMongoConnection = async () => {
         console.log('Connecting to MongoDB:', uri);
 
         await mongoose.connect(uri, {
-            useNewUrlParser: true,
             useUnifiedTopology: true,
         });
 
