@@ -18,9 +18,7 @@ export const initMongoConnection = async () => {
         const uri = `mongodb+srv://${user}:${pwd}@${url}/${db}?retryWrites=true&w=majority`;
         console.log('Connecting to MongoDB:', uri);
 
-        await mongoose.connect(uri, {
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(uri);
 
         console.log('Mongo connection successfully established!');
     } catch (error) {
