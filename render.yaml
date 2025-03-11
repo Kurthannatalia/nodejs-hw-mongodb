@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: my-mongodb-app
+    env: node
+    buildCommand: npm install
+    startCommand: npm run dev
+    envVars:
+      - key: MONGODB_USER
+        value: kurthannatalia
+      - key: MONGODB_PASSWORD
+        sync: false
+      - key: MONGODB_URL
+        value: mycluster.9lhfl.mongodb.net
+      - key: MONGODB_DB
+        value: myDatabase
+      - key: PORT
+        value: 3000
