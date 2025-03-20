@@ -1,33 +1,33 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
-const contactSchema = new Schema(
-  {
+const contactSchema = new mongoose.Schema({
     name: {
-      type: String,
-      required: [true, 'Name is required'],
+        type: String,
+        required: true,
+        minlength: 3,
+        maxlength: 20,
     },
-
     phoneNumber: {
-      type: String,
-      required: [true, 'Phone number is required'],
+        type: String,
+        required: true,
     },
-
     email: {
-      type: String,
-      default: null,
+        type: String,
+        required: true,
     },
     isFavourite: {
-      type: Boolean,
-      default: false,
+        type: Boolean,
+        default: false,
     },
     contactType: {
-      type: String,
-      required: true,
-      enum: ['work', 'home', 'personal'],
-      default: 'personal',
+        type: String,
+        enum: ['work', 'personal'],
+        default: 'personal',
     },
-  },
-  { versionKey: false, timestamps: true },
-);
+});
 
-export const Contact = model('contacts', contactSchema);
+contactSchema.plugin(mongoosePaginate);
+
+const Contact = mongoose.model('Contact', contactSchema);
+export default Contact;
