@@ -1,4 +1,4 @@
-import createError from 'http-errors';
+import createError from 'http-errors'; 
 import { 
     getAllContacts, 
     getContactById, 
@@ -95,10 +95,7 @@ export const deleteContactHandler = async (req, res, next) => {
         if (!deletedContact) {
             throw createError(404, 'Contact not found');
         }
-        res.status(200).json({
-            status: 200,
-            message: 'Contact successfully deleted!',
-        });
+        res.status(204).send();
     } catch (error) {
         next(error);
     }
