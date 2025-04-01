@@ -20,14 +20,16 @@ const contactSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-     contactType: {
-        type: String,
-        enum: ['work', 'personal'],
-        default: 'personal',
+contactType: {
+      type: String,
+      required: true,
+      enum: ['work', 'home', 'personal'],
+      default: 'personal',
     },
-}, 
-{ versionKey: false, timestamps: true });
+  },
+  { versionKey: false, timestamps: true },
+);
 
-const Contact = mongoose.model('Contact', contactSchema);
+export const Contact = model('contacts', contactSchema);
 
 export default Contact;
