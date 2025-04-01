@@ -25,9 +25,8 @@ const contactSchema = new mongoose.Schema({
         enum: ['work', 'personal'],
         default: 'personal',
     },
-});
-
-contactSchema.plugin(mongoosePaginate);
-
+} 
+  { versionKey: false, timestamps: true },
+);
 const Contact = mongoose.model('Contact', contactSchema);
 export default Contact;
