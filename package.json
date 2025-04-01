@@ -10,7 +10,7 @@
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "Alexander Repeta <a.repeta@goit.global>",
+  "author": "Natalia Kurthan <kurthannatalia@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.17.0",
