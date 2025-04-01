@@ -9,6 +9,7 @@ import {
 
 export const getAllContactsHandler = async (req, res, next) => {
     try {
+        
         const { page = 1, perPage = 10, sortBy = 'name', sortOrder = 'asc', type, isFavourite } = req.query;
 
         const filter = {};
@@ -95,10 +96,8 @@ export const deleteContactHandler = async (req, res, next) => {
         if (!deletedContact) {
             throw createError(404, 'Contact not found');
         }
-        res.status(200).json({
-            status: 200,
-            message: 'Contact successfully deleted!',
-        });
+    
+        res.status(204).end();
     } catch (error) {
         next(error);
     }
