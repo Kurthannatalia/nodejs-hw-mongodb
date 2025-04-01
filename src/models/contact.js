@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { model } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 const contactSchema = new mongoose.Schema({
@@ -20,16 +20,14 @@ const contactSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-contactType: {
-      type: String,
-      required: true,
-      enum: ['work', 'home', 'personal'],
-      default: 'personal',
-    },
+  contactType: {
+    type: String,
+    required: true,
+    enum: ['work', 'home', 'personal'],
+    default: 'personal',
   },
-  { versionKey: false, timestamps: true },
-);
+}, { versionKey: false, timestamps: true });
 
 export const Contact = model('contacts', contactSchema);
-
 export default Contact;
+
