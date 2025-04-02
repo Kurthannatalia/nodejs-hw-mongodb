@@ -1,5 +1,12 @@
 import { Router } from 'express';
-import ctrl from '../controllers/contacts.js';
+// Імпортуємо іменовані функції з контролера
+import { 
+    getAllContactsHandler, 
+    getContactByIdHandler, 
+    createContactHandler, 
+    updateContactHandler, 
+    deleteContactHandler 
+} from '../controllers/contacts.js'; 
 import { isValidId } from '../middlewares/isValidId.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { authenticate } from '../middlewares/authenticate.js';
@@ -7,25 +14,31 @@ import * as contactsSchemas from '../validation/contactsValidation.js';
 
 const router = Router();
 
+// Використовуємо middleware для автентифікації
 router.use(authenticate);
 
-router.get('/', ctrl.getAllContactsController);
+// Роут для отримання всіх контактів
+router.get('/', getAllContactsHandler);
 
-router.get('/:contactId', isValidId, ctrl.getContactByIdController);
+// Роут для отримання контакту за ID
+router.get('/:contactId', isValidId, getContactByIdHandler);
 
+// Роут для створення нового контакту
 router.post(
   '/',
   validateBody(contactsSchemas.createContactSchema),
-  ctrl.createContactController,
+  createContactHandler,
 );
 
+// Роут для оновлення контакту за ID
 router.patch(
   '/:contactId',
   isValidId,
   validateBody(contactsSchemas.updateContactSchema),
-  ctrl.updateContactController,
+  updateContactHandler,
 );
 
-router.delete('/:contactId', isValidId, ctrl.deleteContactController);
+// Роут для видалення контакту за ID
+router.delete('/:contactId', isValidId, deleteContactHandler);
 
 export default router;
