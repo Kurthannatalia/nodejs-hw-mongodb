@@ -1,10 +1,10 @@
 import createError from 'http-errors';
-import { 
-    getAllContacts, 
-    getContactById, 
-    createContact, 
-    updateContact, 
-    deleteContact 
+import {
+    getAllContacts,
+    getContactById,
+    createContact,
+    updateContact,
+    deleteContact
 } from '../services/contacts.js';
 
 export const getAllContactsHandler = async (req, res, next) => {
