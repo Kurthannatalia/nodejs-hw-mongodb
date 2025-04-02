@@ -1,101 +1,88 @@
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import createHttpError from 'http-errors';
-import * as contactsServices from '../services/contacts.js';
-import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-import { parsePaginationParams } from '../utils/parsePaginationParams.js';
-import { parseSortParams } from '../utils/parseSortParams.js';
-import { parseFilterParams } from '../utils/parseFilterParams.js';
+import { nanoid } from 'nanoid';
 
-const getAllContactsController = async (req, res) => {
-  const { page, perPage } = parsePaginationParams(req.query);
-  const { sortBy, sortOrder } = parseSortParams(req.query);
-  const filter = parseFilterParams(req.query);
-  const { _id: userId } = req.user;
-
-  const totalContacts = await contactsServices.countContacts({ userId, filter });
-
-  const contacts = await contactsServices.getAllContacts({
-    userId,
-    page,
-    perPage,
-    sortBy,
-    sortOrder,
-    filter,
-  });
-
-  res.status(200).json({
-    status: 200,
-    message: 'Successfully found contacts!',
-    data: {
-      docs: contacts,
-      totalDocs: totalContacts,
-      totalPages: Math.ceil(totalContacts / perPage),
-      hasNextPage: page * perPage < totalContacts,
-      hasPrevPage: page > 1,
+const contactSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
     },
-  });
-};
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    contactType: {
+      type: String,
+      required: true,
+      enum: ['personal', 'business'],
+    },
+    isFavourite: {
+      type: Boolean,
+      default: false,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { timestamps: true }
+);
 
-const getContactByIdController = async (req, res) => {
-  const { contactId } = req.params;
-  const { _id: userId } = req.user;
-  const contact = await contactsServices.getContactById({ contactId, userId });
-
+contactSchema.statics.findContactById = async function (contactId, userId) {
+  const contact = await this.findOne({ _id: contactId, userId });
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
   }
-
-  res.status(200).json({
-    status: 200,
-    message: `Successfully found contact with id ${contactId}!`,
-    data: contact,
-  });
+  return contact;
 };
 
-const createContactController = async (req, res) => {
-  const { _id: userId } = req.user;
-  const contact = await contactsServices.createContact({ ...req.body, userId });
-
-  res.status(201).json({
-    status: 201,
-    message: 'Successfully created a contact!',
-    data: contact,
-  });
+contactSchema.statics.createNewContact = async function (payload) {
+  const newContact = new this(payload);
+  await newContact.save();
+  return newContact;
 };
 
-const updateContactController = async (req, res) => {
-  const { contactId } = req.params;
-  const { _id: userId } = req.user;
-  const result = await contactsServices.updateContact(
-    contactId,
-    userId,
-    req.body,
+contactSchema.statics.updateContact = async function (contactId, userId, payload) {
+  const updatedContact = await this.findOneAndUpdate(
+    { _id: contactId, userId },
+    payload,
+    { new: true }
   );
-
-  if (!result) throw createHttpError(404, 'Contact not found');
-
-  res.status(200).json({
-    status: 200,
-    message: 'Successfully patched a contact!',
-    data: result.contact,
-  });
+  if (!updatedContact) {
+    throw createHttpError(404, 'Contact not found');
+  }
+  return updatedContact;
 };
 
-const deleteContactController = async (req, res) => {
-  const { contactId } = req.params;
-  const { _id: userId } = req.user;
-  const result = await contactsServices.deleteContact({ contactId, userId });
-
-  if (!result) throw createHttpError(404, 'Contact not found');
-
-  res.status(204).send();
+contactSchema.statics.deleteContact = async function (contactId, userId) {
+  const deletedContact = await this.findOneAndDelete({ _id: contactId, userId });
+  if (!deletedContact) {
+    throw createHttpError(404, 'Contact not found');
+  }
+  return deletedContact;
 };
 
-const ctrl = {
-  getAllContactsController: ctrlWrapper(getAllContactsController),
-  getContactByIdController: ctrlWrapper(getContactByIdController),
-  createContactController: ctrlWrapper(createContactController),
-  updateContactController: ctrlWrapper(updateContactController),
-  deleteContactController: ctrlWrapper(deleteContactController),
-};
+const Contact = mongoose.model('Contact', contactSchema);
 
-export default ctrl;
+export { Contact };
