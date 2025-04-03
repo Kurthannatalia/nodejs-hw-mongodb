@@ -75,4 +75,3 @@ contactSchema.statics.deleteContact = async function (contactId, userId) {
 const Contact = mongoose.model('Contact', contactSchema);
 
 export { Contact };
-
