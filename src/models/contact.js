@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import createHttpError from 'http-errors';
 
+const { Schema } = mongoose;
+
 const contactSchema = new Schema(
   {
     name: {
@@ -73,3 +75,4 @@ contactSchema.statics.deleteContact = async function (contactId, userId) {
 const Contact = mongoose.model('Contact', contactSchema);
 
 export { Contact };
+
