@@ -1,37 +1,24 @@
 import { Router } from 'express';
-import { 
-    getAllContactsHandler, 
-    getContactByIdHandler, 
-    createContactHandler, 
-    updateContactHandler, 
-    deleteContactHandler 
-} from '../controllers/contacts.js'; 
-import { isValidId } from '../middlewares/isValidId.js';
 import { validateBody } from '../middlewares/validateBody.js';
-import { authenticate } from '../middlewares/authenticate.js';
-import * as contactsSchemas from '../validation/contactsValidation.js';
+import * as authSchemas from '../validation/auth.js';
+import ctrl from '../controllers/auth.js';
 
 const router = Router();
 
-router.use(authenticate);
-
-router.get('/', getAllContactsHandler);
-
-router.get('/:contactId', isValidId, getContactByIdHandler);
+router.post(
+  '/register',
+  validateBody(authSchemas.registerUserSchema),
+  ctrl.registerUserController,
+);
 
 router.post(
-  '/',
-  validateBody(contactsSchemas.createContactSchema),
-  createContactHandler,
+  '/login',
+  validateBody(authSchemas.loginUserSchema),
+  ctrl.loginUserController,
 );
 
-router.patch(
-  '/:contactId',
-  isValidId,
-  validateBody(contactsSchemas.updateContactSchema),
-  updateContactHandler,
-);
+router.post('/refresh', ctrl.refreshUserSessionController);
 
-router.delete('/:contactId', isValidId, deleteContactHandler);
+router.post('/logout', ctrl.logoutUserController);
 
 export default router;

@@ -1,52 +1,39 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import createHttpError from 'http-errors';
-import { nanoid } from 'nanoid';
 
-const contactSchema = new mongoose.Schema(
+const contactSchema = new Schema(
   {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
     name: {
       type: String,
-      required: true,
-      trim: true,
+      required: [true, 'Name is required'],
     },
+
+    phoneNumber: {
+      type: String,
+      required: [true, 'Phone number is required'],
+    },
+
     email: {
       type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
-    contactType: {
-      type: String,
-      required: true,
-      enum: ['personal', 'business'],
+      default: null,
     },
     isFavourite: {
       type: Boolean,
       default: false,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+    contactType: {
+      type: String,
+      required: true,
+      enum: ['work', 'home', 'personal'],
+      default: 'personal',
     },
-    updatedAt: {
-      type: Date,
-      default: Date.now,
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+      required: true,
     },
   },
-  { timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 contactSchema.statics.findContactById = async function (contactId, userId) {

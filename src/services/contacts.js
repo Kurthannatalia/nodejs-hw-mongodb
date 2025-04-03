@@ -16,7 +16,7 @@ export const getAllContacts = async ({
   const contactsQuery = Contact.find({ userId }, '-createdAt -updatedAt');
 
   if (filter.isFavourite) {
-    contactsQuery.where('isFavourite').equals(filter.isFavourite);
+    contactsQuery.where(`isFavourite`).equals(filter.isFavourite);
   }
 
   if (filter.contactType) {
@@ -41,30 +41,44 @@ export const getAllContacts = async ({
 };
 
 export const getContactById = async ({ contactId, userId }) => {
-  const contact = await Contact.findContactById(contactId, userId);
-  if (!contact) {
-    return null;
-  }
-  return contact;
+  const result = await Contact.findOne(
+    { _id: contactId, userId },
+    '-createdAt -updatedAt',
+  );
+  return result;
 };
 
 export const createContact = async (payload) => {
-  const contact = await Contact.createNewContact(payload);
-  return contact;
+  const result = await Contact.create(payload);
+  return result;
 };
 
-export const updateContact = async (contactId, userId, payload) => {
-  const contact = await Contact.updateContact(contactId, userId, payload);
-  if (!contact) {
-    return null;
-  }
-  return contact;
+export const updateContact = async (
+  contactId,
+  userId,
+  payload,
+  options = {},
+) => {
+  const result = await Contact.findOneAndUpdate(
+    { _id: contactId, userId },
+    payload,
+    {
+      new: true,
+      includeResultMetadata: true,
+      ...options,
+    },
+  );
+
+  if (!result || !result.value) return null;
+
+  return {
+    contact: result.value,
+    isNew: Boolean(result?.lastErrorObject?.upserted),
+  };
 };
 
 export const deleteContact = async ({ contactId, userId }) => {
-  const contact = await Contact.deleteContact(contactId, userId);
-  if (!contact) {
-    return null;
-  }
-  return contact;
+  const result = await Contact.findOneAndDelete({ _id: contactId, userId });
+
+  return result;
 };
