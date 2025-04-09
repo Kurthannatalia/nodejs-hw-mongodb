@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-import createHttpError from 'http-errors';
 
 const contactSchema = new Schema(
   {
@@ -36,6 +35,4 @@ const contactSchema = new Schema(
   { versionKey: false, timestamps: true },
 );
 
-const Contact = model('Contact', contactSchema);
-
-export { Contact };
+export const Contact = model('contact', contactSchema);
