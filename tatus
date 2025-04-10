@@ -1,0 +1,84 @@
+[33m1319870[m[33m ([m[1;36mHEAD -> [m[1;32mhw6-email-and-images[m[33m, [m[1;31morigin/hw6-email-and-images[m[33m)[m HEAD@{0}: reset: moving to HEAD~2
+[33m85ecaff[m HEAD@{1}: commit: env fix
+[33m6a37f30[m HEAD@{2}: commit: env upd
+[33m1319870[m[33m ([m[1;36mHEAD -> [m[1;32mhw6-email-and-images[m[33m, [m[1;31morigin/hw6-email-and-images[m[33m)[m HEAD@{3}: commit: upd js
+[33m6b9fefd[m HEAD@{4}: commit: update npm
+[33m2c1888e[m HEAD@{5}: commit: add task
+[33mf242395[m HEAD@{6}: commit: add task
+[33m4bcf665[m[33m ([m[1;31morigin/hw5-auth[m[33m, [m[1;32mhw5-auth[m[33m)[m HEAD@{7}: checkout: moving from hw7-swagger to hw6-email-and-images
+[33m4bcf665[m[33m ([m[1;31morigin/hw5-auth[m[33m, [m[1;32mhw5-auth[m[33m)[m HEAD@{8}: checkout: moving from hw6-email-and-images to hw7-swagger
+[33m4bcf665[m[33m ([m[1;31morigin/hw5-auth[m[33m, [m[1;32mhw5-auth[m[33m)[m HEAD@{9}: checkout: moving from hw5-auth to hw6-email-and-images
+[33m4bcf665[m[33m ([m[1;31morigin/hw5-auth[m[33m, [m[1;32mhw5-auth[m[33m)[m HEAD@{10}: commit: fix_comments
+[33m28e9ab7[m HEAD@{11}: commit: upd_models
+[33m86c6787[m HEAD@{12}: reset: moving to HEAD~3
+[33m9492dc5[m HEAD@{13}: commit: Fix contact delete endpoint
+[33me6f81ab[m HEAD@{14}: commit: fix: adjust contacts API structure
+[33mb8ea43a[m HEAD@{15}: commit: Fix contact retrieval, pagination, and update phone field
+[33m86c6787[m HEAD@{16}: reset: moving to HEAD~1
+[33m5af29cd[m HEAD@{17}: commit: upd_roles
+[33m86c6787[m HEAD@{18}: commit: upd_contacts
+[33m51d9427[m HEAD@{19}: commit: upd_shema2
+[33m356897b[m HEAD@{20}: commit: upd_shema
+[33m03f478b[m HEAD@{21}: commit: upd_npm
+[33mcbe86a9[m HEAD@{22}: commit: upd_structure
+[33m46dbb48[m HEAD@{23}: commit: fix_routers
+[33m25f4560[m HEAD@{24}: commit: fix_import
+[33m7c03c34[m HEAD@{25}: commit: fix_upd_npm
+[33m1290228[m HEAD@{26}: commit: Replace_pagination _plugin_with_manual_setup
+[33mb4449d2[m HEAD@{27}: commit: upd_npm
+[33mad63a62[m HEAD@{28}: commit: add_task
+[33m33cd55d[m HEAD@{29}: checkout: moving from hw4-validation to hw5-auth
+[33m4269505[m[33m ([m[1;31morigin/hw4-validation[m[33m, [m[1;32mhw4-validation[m[33m)[m HEAD@{30}: commit: Fix model import issue
+[33mc61dbdd[m HEAD@{31}: commit: Update_pagination_logic
+[33m5ee137a[m HEAD@{32}: commit: upd_models
+[33m9c8eeb0[m HEAD@{33}: commit (merge): fix_merge_problem
+[33mb9b4d26[m HEAD@{34}: commit: upd
+[33m1feecd0[m HEAD@{35}: reset: moving to HEAD~1
+[33m0202633[m HEAD@{36}: commit: upd
+[33m1feecd0[m HEAD@{37}: commit: Fix_syntax_error
+[33m0f36073[m HEAD@{38}: commit: Fix_pagination_and _sorting_issues
+[33m1f63ec0[m HEAD@{39}: commit: fix_error
+[33m5819b75[m HEAD@{40}: checkout: moving from hw4-validation to hw4-validation
+[33m5819b75[m HEAD@{41}: reset: moving to 5819b75
+[33m9117db2[m HEAD@{42}: commit: fix_sorting
+[33mfd8db6d[m HEAD@{43}: commit: upd_sorting_issue
+[33m2364fff[m HEAD@{44}: commit: upd
+[33m5d45d0a[m HEAD@{45}: commit: fix_missing_module_errors
+[33m3779227[m HEAD@{46}: commit: Project_cleanup:_structure_&_dependencies
+[33ma7ae6c3[m HEAD@{47}: commit: fix_error_route
+[33m583e310[m HEAD@{48}: commit: improve_sort_handling
+[33m8830cda[m HEAD@{49}: commit: resolve_sorting_issue_&_standardize_error_response_format
+[33m6708068[m HEAD@{50}: commit: small_upd
+[33m673b59f[m HEAD@{51}: commit: upd_mongoose_Paginate
+[33m5819b75[m HEAD@{52}: commit: upd_server
+[33mc2359aa[m HEAD@{53}: commit: upd_serv_contact.js
+[33me4a8598[m HEAD@{54}: commit: upd
+[33m15880c6[m HEAD@{55}: commit: upd
+[33m39176ac[m HEAD@{56}: commit: error_fix_on_server
+[33mb5b86a6[m HEAD@{57}: commit: upd_package_lock_json
+[33m78166fc[m HEAD@{58}: commit: fix_bug
+[33md73a9fa[m HEAD@{59}: commit: ✅ Mentor fixes: schema timestamps, removed extra check, 204 on delete
+[33m33cd55d[m HEAD@{60}: checkout: moving from hw5-auth to hw4-validation
+[33m33cd55d[m HEAD@{61}: checkout: moving from hw4-validation to hw5-auth
+[33m33cd55d[m HEAD@{62}: commit: upd_package_lock_json
+[33mf6d8c96[m HEAD@{63}: commit: upd_task
+[33md37eb79[m HEAD@{64}: commit: upd_src_files
+[33mda90f0c[m HEAD@{65}: commit: upd
+[33m14c7e9e[m[33m ([m[1;31morigin/hw3-crud[m[33m, [m[1;32mhw3-crud[m[33m)[m HEAD@{66}: checkout: moving from hw3-crud to hw4-validation
+[33m14c7e9e[m[33m ([m[1;31morigin/hw3-crud[m[33m, [m[1;32mhw3-crud[m[33m)[m HEAD@{67}: checkout: moving from hw3-crud to hw3-crud
+[33m14c7e9e[m[33m ([m[1;31morigin/hw3-crud[m[33m, [m[1;32mhw3-crud[m[33m)[m HEAD@{68}: commit: UPD
+[33mfdddbf9[m HEAD@{69}: commit: server_upd
+[33m9b91907[m HEAD@{70}: commit: bud_fix
+[33m38a8e28[m HEAD@{71}: commit: UPD_src_files
+[33m5d36f4f[m HEAD@{72}: commit: Add_configuration_files
+[33m5ff67e7[m HEAD@{73}: commit: Initialize_new_directories_&_ files
+[33m9b5a1f6[m HEAD@{74}: commit: upd_new
+[33mf555d99[m[33m ([m[1;31morigin/hw2-mongodb[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mhw2-mongodb[m[33m)[m HEAD@{75}: checkout: moving from hw2-mongodb to hw3-crud
+[33mf555d99[m[33m ([m[1;31morigin/hw2-mongodb[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mhw2-mongodb[m[33m)[m HEAD@{76}: commit: upd
+[33m03dd032[m HEAD@{77}: commit: Connection_bug_fixed
+[33m7fa20b0[m HEAD@{78}: commit: Update render.yaml with environment variables
+[33m42b2d57[m HEAD@{79}: commit: Fix_MongoDB_connection_issue
+[33md40809e[m HEAD@{80}: commit: Added_src_files
+[33m75460ea[m HEAD@{81}: commit: Add_configuration_files_and_dependencies
+[33m998b469[m HEAD@{82}: commit: Installed dependencies
+[33m68935ee[m HEAD@{83}: commit (initial): Initial commit for hw2-mongodb
