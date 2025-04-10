@@ -1,7 +1,14 @@
-import createHttpError from 'http-errors';
+import multer from 'multer';
+import { TEMP_UPLOAD_DIR } from '../constants/index.js';
 
-export const mongooseErrorHandler = (err, __, next) => {
-  const { name, code } = err;
-  const status = name === 'MongoServerError' && code === 11000 ? 409 : 400;
-  next(createHttpError(status, 'There was a duplicate key error'));
-};
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, TEMP_UPLOAD_DIR);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+    cb(null, `${uniqueSuffix}_${file.originalname}`);
+  },
+});
+
+export const upload = multer({ storage });

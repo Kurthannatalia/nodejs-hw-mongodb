@@ -1,24 +1,49 @@
 import { Router } from 'express';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import {
+  loginUserSchema,
+  registerUserSchema,
+  requestResetEmailSchema,
+  resetPasswordSchema,
+} from '../validation/auth.js';
+import {
+  loginUserController,
+  logoutUserController,
+  refreshUserSessionController,
+  registerUserController,
+  requestResetEmailController,
+  resetPasswordController,
+} from '../controllers/auth.js';
 import { validateBody } from '../middlewares/validateBody.js';
-import * as authSchemas from '../validation/auth.js';
-import ctrl from '../controllers/auth.js';
-
-const router = Router();
-
-router.post(
+////////////////////////////////////////////////////////////////////
+const authRouter = Router();
+////////////////////////////////////////////////////////////////////
+authRouter.post(
   '/register',
-  validateBody(authSchemas.registerUserSchema),
-  ctrl.registerUserController,
+  validateBody(registerUserSchema),
+  ctrlWrapper(registerUserController),
 );
-
-router.post(
+////////////////////////////////////////////////////////////////////
+authRouter.post(
   '/login',
-  validateBody(authSchemas.loginUserSchema),
-  ctrl.loginUserController,
+  validateBody(loginUserSchema),
+  ctrlWrapper(loginUserController),
 );
-
-router.post('/refresh', ctrl.refreshUserSessionController);
-
-router.post('/logout', ctrl.logoutUserController);
-
-export default router;
+////////////////////////////////////////////////////////////////////
+authRouter.post('/logout', ctrlWrapper(logoutUserController));
+////////////////////////////////////////////////////////////////////
+authRouter.post('/refresh', ctrlWrapper(refreshUserSessionController));
+////////////////////////////////////////////////////////////////////
+authRouter.post(
+  '/send-reset-email',
+  validateBody(requestResetEmailSchema),
+  ctrlWrapper(requestResetEmailController),
+);
+////////////////////////////////////////////////////////////////////
+authRouter.post(
+  '/reset-pwd',
+  validateBody(resetPasswordSchema),
+  ctrlWrapper(resetPasswordController),
+);
+////////////////////////////////////////////////////////////////////
+export default authRouter;
