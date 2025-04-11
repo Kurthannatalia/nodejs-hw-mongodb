@@ -1,6 +1,6 @@
 import { ContactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
-////////////////////////////////////////////////////////////////////
+
 export const getAllContacts = async ({
   page = 1,
   perPage = 2,
@@ -34,17 +34,17 @@ export const getAllContacts = async ({
     ...paginationData,
   };
 };
-////////////////////////////////////////////////////////////////////
+
 export const getContactById = (id) => ContactsCollection.findById(id);
-////////////////////////////////////////////////////////////////////
+
 export const getContact = async (filter) => {
   return await ContactsCollection.findOne(filter);
 };
-////////////////////////////////////////////////////////////////////
+
 export const createContact = async (payload) => {
   return await ContactsCollection.create(payload);
 };
-////////////////////////////////////////////////////////////////////
+
 export const updateContact = async (filter, payload, options = {}) => {
   //
   const rawResult = await ContactsCollection.findOneAndUpdate(filter, payload, {
@@ -59,7 +59,7 @@ export const updateContact = async (filter, payload, options = {}) => {
     isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
 };
-////////////////////////////////////////////////////////////////////
+
 export const deleteContact = async (filter) => {
   return await ContactsCollection.findOneAndDelete(filter);
 };

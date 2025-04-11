@@ -129,7 +129,7 @@ export const requestResetToken = async (email) => {
     html,
   });
 };
-////////////////////////////////////////////////////////////////////
+
 export const resetPassword = async (payload) => {
   let entries;
 
