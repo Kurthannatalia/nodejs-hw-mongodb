@@ -1,4 +1,3 @@
-////////////////////////////////////////////////////////////////////
 const parseSortOrder = (sortOrder) => {
   const isKnownOrder = ['asd', 'desc'].includes(sortOrder);
   if (isKnownOrder) return sortOrder;
@@ -33,4 +32,3 @@ export const parseSortParams = (query) => {
     sortBy: parsedSortBy,
   };
 };
-///////////////

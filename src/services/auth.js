@@ -1,4 +1,3 @@
-////////////////////////////////////////////////////////////////////
 import createHttpError from 'http-errors';
 import bcrypt from 'bcrypt';
 import { getEnvVar } from '../utils/getEnvVar.js';
@@ -27,12 +26,15 @@ const createSession = () => {
 };
 ////////////////////////////////////////////////////////////////////
 export const register = async (payload) => {
-  //
+
+  console.log('Email from request:', payload.email); 
+
   const user = await UsersCollection.findOne({ email: payload.email });
   if (user) {
+    console.log('User not found in DB');
     throw createHttpError(409, 'Email in use');
   }
-  //
+  console.log('Found user:', user); 
   const hashPassword = await bcrypt.hash(payload.password, 10);
   //
   return await UsersCollection.create({ ...payload, password: hashPassword });
@@ -47,6 +49,7 @@ export const login = async (payload) => {
   //
   const passwordCompare = await bcrypt.compare(payload.password, user.password);
   if (!passwordCompare) {
+    console.log('Password does not match');
     throw createHttpError(401, 'Please check your password');
   }
   //
@@ -129,7 +132,7 @@ export const requestResetToken = async (email) => {
     html,
   });
 };
-
+////////////////////////////////////////////////////////////////////
 export const resetPassword = async (payload) => {
   let entries;
 

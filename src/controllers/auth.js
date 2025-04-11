@@ -1,3 +1,4 @@
+////////////////////////////////////////////////////////////////////
 import {
     register,
     login,
@@ -7,24 +8,24 @@ import {
     resetPassword,
   } from '../services/auth.js';
   import { THIRTY_DAYS } from '../constants/user.js';
-
+  ////////////////////////////////////////////////////////////////////
   const setupSession = (res, session) => {
-    
+    //
     res.cookie('refreshToken', session.refreshToken, {
       httpOnly: true,
       expires: new Date(Date.now() + THIRTY_DAYS),
     });
-    
+    //
     res.cookie('sessionId', session._id, {
       httpOnly: true,
       expires: new Date(Date.now() + THIRTY_DAYS),
     });
   };
-  
+  ////////////////////////////////////////////////////////////////////
   export const registerUserController = async (req, res) => {
-    
+    //
     const user = await register(req.body);
-    
+    //
     res.status(201).json({
       status: 201,
       message: 'Successfully registered a user !',
@@ -34,7 +35,7 @@ import {
       },
     });
   };
- 
+  ////////////////////////////////////////////////////////////////////
   export const loginUserController = async (req, res) => {
     //
     const session = await login(req.body);
@@ -49,16 +50,16 @@ import {
       },
     });
   };
-
+  ////////////////////////////////////////////////////////////////////
   export const refreshUserSessionController = async (req, res) => {
-    
+    //
     const session = await refresh({
       sessionId: req.cookies.sessionId,
       refreshToken: req.cookies.refreshToken,
     });
-    
+    //
     setupSession(res, session);
-    
+    //
     res.json({
       status: 200,
       message: 'Successfully refreshed a session!',
@@ -67,19 +68,19 @@ import {
       },
     });
   };
-
+  ////////////////////////////////////////////////////////////////////
   export const logoutUserController = async (req, res) => {
-    
+    //
     if (req.cookies.sessionId) {
       await logout(req.cookies.sessionId);
     }
-    
+    //
     res.clearCookie('sessionId');
     res.clearCookie('refreshToken');
-    
+    //
     res.status(204).send();
   };
-
+  ////////////////////////////////////////////////////////////////////
   export const requestResetEmailController = async (req, res) => {
     await requestResetToken(req.body.email);
     res.json({
@@ -88,7 +89,7 @@ import {
       data: {},
     });
   };
-
+  ////////////////////////////////////////////////////////////////////
   export const resetPasswordController = async (req, res) => {
     await resetPassword(req.body);
     res.json({

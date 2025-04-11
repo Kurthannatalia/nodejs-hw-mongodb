@@ -1,4 +1,3 @@
-////////////////////////////////////////////////////////////////////
 const parseNumber = (number, defaultValue) => {
   if (typeof number !== 'string') return defaultValue;
   //
@@ -19,4 +18,3 @@ export const parsePaginationParams = (query) => {
     perPage: parsedPerPage,
   };
 };
-////////////////////////////////////////////////////////////////////

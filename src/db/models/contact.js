@@ -1,40 +1,38 @@
-import { model, Schema, SchemaType } from 'mongoose';
-import { typeList } from '../../constants/contacts.js';
+import { model, Schema } from 'mongoose';
 
-export const contactsSchema = new Schema(
+const contactSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, 'Name is required'],
     },
+
     phoneNumber: {
       type: String,
-      required: true,
+      required: [true, 'Phone number is required'],
     },
+
     email: {
       type: String,
+      default: null,
     },
     isFavourite: {
       type: Boolean,
-      required: false,
+      default: false,
     },
     contactType: {
       type: String,
-      enum: typeList,
       required: true,
+      enum: ['work', 'home', 'personal'],
       default: 'personal',
     },
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'user',
-      require: true,
+      required: true,
     },
-    photo: { type: String },
   },
-  {
-    timestamps: true,
-    versionKey: false,
-  },
+  { versionKey: false, timestamps: true },
 );
 
-export const ContactsCollection = model('contacts', contactsSchema);
+export const ContactsCollection = model('contacts', contactSchema);
